@@ -267,7 +267,7 @@ function updateEvents(date) {
   }*/
 <?php 
     $events= "";
-    $horas = ["10:00", "11:00", "12:00", "13:00", "15:00"];
+    $horas = ["10:00", "11:00", "12:00", "13:00", "15:00", "16:00"];
     if(1==1) {
         foreach($horas as $hor) {
 ?>
@@ -445,7 +445,7 @@ addEventSubmit.addEventListener("click", () => {
 //function to delete event when clicked on event
 eventsContainer.addEventListener("click", (e) => {
   if (e.target.classList.contains("event")) {
-    if (confirm("Are you sure you want to delete this event?")) {
+    if (confirm("Agendar en este horario y día?")) {
       const eventTitle = e.target.children[0].children[1].innerHTML;
       eventsArr.forEach((event) => {
         if (
