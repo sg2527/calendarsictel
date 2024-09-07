@@ -1,5 +1,13 @@
+<?php
+  require "cn/database.php";
+  $date = date("d-m-Y");
+  $horas = ["10:00", "11:00", "12:00", "13:00", "15:00", "16:00"];
+  //echo '<script> alert("'.$date.'"); </script>';
+
+?>
+
 <script type="text/javascript">
-        const calendar = document.querySelector(".calendar"),
+  const calendar = document.querySelector(".calendar"),
   date = document.querySelector(".date"),
   daysContainer = document.querySelector(".days"),
   prev = document.querySelector(".prev"),
@@ -38,7 +46,7 @@ const months = [
   "Diciembre",
 ];
 
-const eventsArr = [
+/*const eventsArr = [
   {
     day: 13,
     month: 11,
@@ -54,9 +62,9 @@ const eventsArr = [
       },
     ],
   },
-];
+];*/
 
-//const eventsArr = [];
+const eventsArr = [];
 getEvents();
 console.log(eventsArr);
 
@@ -235,7 +243,14 @@ function getActiveDay(date) {
   const day = new Date(year, month, date);
   const dayName = day.toString().split(" ")[0];
   eventDay.innerHTML = "Horarios";
-  eventDate.innerHTML = date + "-" + month + "-" + year;
+  if (date<10){
+    date = "0"+date;
+    
+  }
+  if(date.length < 2){
+    date = "0" + date;
+  }
+  eventDate.innerHTML = date + "-" + (month<10 ? "0"+(month+1) : month+1) + "-" + year;
 }
 
 //function update events when a day is active
@@ -267,7 +282,7 @@ function updateEvents(date) {
   }*/
 <?php 
     $events= "";
-    $horas = ["10:00", "11:00", "12:00", "13:00", "15:00", "16:00"];
+    
     if(1==1) {
         foreach($horas as $hor) {
 ?>
@@ -446,8 +461,15 @@ addEventSubmit.addEventListener("click", () => {
 eventsContainer.addEventListener("click", (e) => {
   if (e.target.classList.contains("event")) {
     if (confirm("Agendar en este horario y día?")) {
-      const eventTitle = e.target.children[0].children[1].innerHTML;
-      eventsArr.forEach((event) => {
+      const horario = e.target.children[0].children[1].innerHTML;
+      fechaReservacion = eventDate.innerHTML;
+      let hoy = new Date();
+      fecRec = fechaReservacion.split('-');
+      fechaReservacion = new Date(fecRec[1]+"-"+fecRec[0]+"-"+fecRec[2]);
+      fechaReservacion = fechaReservacion.toDateString();
+      fechaActual = hoy.toDateString();
+
+      /*eventsArr.forEach((event) => {
         if (
           event.day === activeDay &&
           event.month === month + 1 &&
@@ -469,7 +491,23 @@ eventsContainer.addEventListener("click", (e) => {
           }
         }
       });
-      updateEvents(activeDay);
+      updateEvents(activeDay);*/
+      
+      if(Date.parse(fechaReservacion) < Date.parse(fechaActual)){
+        alert('No puede reservar en una fecha pasada');
+      }else{
+        document.cookie = "fechajs = " + fechaReservacion;
+        <?php
+          if(isset($_COOKIE["fechajs"])) {
+            $fechaSel = $_COOKIE["fechajs"];
+            echo 'alert("cookie tomada");';
+          } else {
+            $fechaSel="";
+            echo('alert("no hay cookies");');
+          }
+          echo'alert("Se agendó el mantenimiento en el día y la hora solicitados. Fecha desde php: '.$fechaSel.'");'; ?>
+          window.location('agendado.php');
+      }
     }
   }
 });

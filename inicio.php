@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -33,13 +33,13 @@
             <i class="fas fa-angle-right next"></i>
           </div>
           <div class="weekdays">
-            <div>Domingo</div>
-            <div>Lunes</div>
-            <div>Martes</div>
-            <div>Miércoles</div>
-            <div>Jueves</div>
-            <div>Viernes</div>
-            <div>Sábado</div>
+            <div>Dom</div>
+            <div>Lun</div>
+            <div>Mar</div>
+            <div>Mie</div>
+            <div>Jue</div>
+            <div>Vie</div>
+            <div>Sab</div>
           </div>
           <div class="days"></div>
           <div class="goto-today">
@@ -90,9 +90,9 @@
           </div>
         </div>
       </div>
-      <button class="add-event">
-        <i class="fas fa-plus"></i>
-      </button>
+      <button class="add-event" id="buttonid" disabled >
+        <i class="fa-solid fa-calendar"></i>
+      </button> 
     </div>
 
     <div class="credits">
