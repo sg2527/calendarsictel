@@ -1,8 +1,27 @@
 <?php
   require "cn/database.php";
-  $date = date("d-m-Y");
   $horas = ["10:00", "11:00", "12:00", "13:00", "15:00", "16:00"];
-  //echo '<script> alert("'.$date.'"); </script>';
+  
+
+  function validarReservado(){
+    try{
+        echo '<script> alert("validando"); </script>';
+        $sql = 'select reservado from reservacion where correo=?';
+                $correo = 'sgalvan@sictel.com';
+                $comando = Database::getInstance()->getDb() -> prepare($sql);
+                $comando -> execute(array($correo));
+                $row = $comando -> fetch(PDO::FETCH_ASSOC);
+                echo '<script> alert("se obtuvo el valor"); </script>';
+                if($row['reservado'] == '1'){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+  }
 
 ?>
 
@@ -497,16 +516,8 @@ eventsContainer.addEventListener("click", (e) => {
         alert('No puede reservar en una fecha pasada');
       }else{
         document.cookie = "fechajs = " + fechaReservacion;
-        <?php
-          if(isset($_COOKIE["fechajs"])) {
-            $fechaSel = $_COOKIE["fechajs"];
-            echo 'alert("cookie tomada");';
-          } else {
-            $fechaSel="";
-            echo('alert("no hay cookies");');
-          }
-          echo'alert("Se agendó el mantenimiento en el día y la hora solicitados. Fecha desde php: '.$fechaSel.'");'; ?>
-          window.location('agendado.php');
+        document.cookie = "horariojs = "+horario;
+        window.location.href = 'agendado.php';
       }
     }
   }
