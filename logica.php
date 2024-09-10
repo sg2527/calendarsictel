@@ -1,28 +1,8 @@
 <?php
-  require "cn/database.php";
-  $horas = ["10:00", "11:00", "12:00", "13:00", "15:00", "16:00"];
-  
-
-  function validarReservado(){
-    try{
-        echo '<script> alert("validando"); </script>';
-        $sql = 'select reservado from reservacion where correo=?';
-                $correo = 'sgalvan@sictel.com';
-                $comando = Database::getInstance()->getDb() -> prepare($sql);
-                $comando -> execute(array($correo));
-                $row = $comando -> fetch(PDO::FETCH_ASSOC);
-                echo '<script> alert("se obtuvo el valor"); </script>';
-                if($row['reservado'] == '1'){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-    }catch(PDOException $e){
-        echo $e->getMessage();
-    }
-  }
-
+  //require "cn/database.php";
+  require 'functions.php';
+  $horas = ["10:00:00", "11:00:00", "12:00:00", "13:00:00", "15:00:00", "16:00:00"];
+  $div;
 ?>
 
 <script type="text/javascript">
@@ -270,6 +250,12 @@ function getActiveDay(date) {
     date = "0" + date;
   }
   eventDate.innerHTML = date + "-" + (month<10 ? "0"+(month+1) : month+1) + "-" + year;
+  <?php
+    $dochtml = new DOMDocument();
+    $dochtml->loadHTMLFile("inicio.php");
+    $dochtml->validateOnParse = true; 
+    $div = $dochtml->getElement->textContent;
+  ?>
 }
 
 //function update events when a day is active
@@ -300,9 +286,9 @@ function updateEvents(date) {
         </div>`;
   }*/
 <?php 
-    $events= "";
     
-    if(1==1) {
+    
+    if(1==3) {
         foreach($horas as $hor) {
 ?>
     events += `<div class="event">
@@ -316,10 +302,12 @@ function updateEvents(date) {
         </div>`;
 <?php
         }
-    }if(2==1){
-        $events = `<div class="no-event">
-        <   h3>Sin horarios disponibles</h3>
+    }if(2==2){
+?>
+        events = `<div class="no-event">
+        <h3>Sin horarios disponibles</h3>
         </div>`;
+<?php
     }
 ?>
   eventsContainer.innerHTML = events;

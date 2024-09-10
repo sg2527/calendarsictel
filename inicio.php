@@ -54,7 +54,7 @@
       <div class="right">
         <div class="today-date">
           <div class="event-day">wed</div>
-          <div class="event-date">12th december 2022</div>
+          <div class="event-date" id="fecha-select"></div>
         </div>
                 <div class="events">
                     
