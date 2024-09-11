@@ -27,7 +27,7 @@
 
 let today = new Date();
 let activeDay;
-let month = today.getMonth();
+let month = 8;
 let year = today.getFullYear();
 
 const months = [
@@ -76,7 +76,7 @@ function initCalendar() {
   const lastDate = lastDay.getDate();
   const day = firstDay.getDay();
   const nextDays = 7 - lastDay.getDay() - 1;
-
+  alert("firstday: "+lastDate);
   date.innerHTML = months[month] + " " + year;
 
   let days = "";
@@ -129,18 +129,18 @@ function initCalendar() {
 //function to add month and year on prev and next button
 function prevMonth() {
   month--;
-  if (month < 0) {
-    month = 11;
-    year--;
+  if (month < 8) {
+    month = 10;
+    //year--;
   }
   initCalendar();
 }
 
 function nextMonth() {
   month++;
-  if (month > 11) {
-    month = 0;
-    year++;
+  if (month > 10) {
+    month = 8;
+    //year++;
   }
   initCalendar();
 }
@@ -253,6 +253,7 @@ function getActiveDay(date) {
   <?php
     $dochtml = new DOMDocument();
     $dochtml->loadHTMLFile("inicio.php");
+    
     $dochtml->validateOnParse = true; 
     $div = $dochtml->getElementById("fecha-select")->textContent;
   ?>

@@ -24,7 +24,6 @@
 
     function validarDias($fecha){ 
         $dochtml = new DOMDocument();
-        //libxml_use_internal_errors(true);
         $dochtml->loadHTMLFile("inicio.php");
         $dochtml->validateOnParse = true; 
         $div = $dochtml->getElementById("fecha-select")->textContent;
@@ -40,19 +39,10 @@
             $comando -> execute(array($fecha));
             $row = $comando -> fetchAll(PDO::FETCH_ASSOC);
             if($row){
-                //$horasdiff = array_diff($horas, $row[0]['horario']);
 
                 foreach($row as $hora){
                     $result[]=$hora['horario'];
-                    /*foreach($horas as $hor){
-                        
-                        if($hora['horario'] == $hor){
-                            unset($horas[$i]);
-                            echo '<script> alert("'.$hor.'\n vuelta: '.$i.'");</script>';
-                        }
-                        $i++;
-                    }
-                    $i=0;*/
+                    
                 }
                 $horasdiff = array_diff($horas, $result);
                 return var_dump($horasdiff);
@@ -61,6 +51,24 @@
                 return var_dump($horas);
             }
         }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+
+    function getAllDays(){
+        try{
+            $sql = "SELECT fecha, horario, reservado FROM `reservacion` WHERE fecha between '2024-09-17' and '2024-11-30'";
+            
+            $comando = Database::getInstance()->getDb() -> prepare($sql);
+            $comando -> execute();
+            $row = $comando -> fetchAll(PDO::FETCH_ASSOC);
+            if($row){
+                foreach($row as $hora){
+                
+                }
+                
+            }
+        }catch(PDOException $e){   
             echo $e->getMessage();
         }
     }

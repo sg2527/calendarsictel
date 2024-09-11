@@ -2,7 +2,7 @@
 
   require 'functions.php';
 
-  validarDias('2024-09-10');
+  getAllDays();
   //echo $horarios;
   
 
