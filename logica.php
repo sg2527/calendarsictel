@@ -249,12 +249,12 @@ function getActiveDay(date) {
   if(date.length < 2){
     date = "0" + date;
   }
-  eventDate.innerHTML = date + "-" + (month<10 ? "0"+(month+1) : month+1) + "-" + year;
+  eventDate.innerHTML = date + "-" + (month+1<10 ? "0"+(month+1) : month+1) + "-" + year;
   <?php
     $dochtml = new DOMDocument();
     $dochtml->loadHTMLFile("inicio.php");
     $dochtml->validateOnParse = true; 
-    $div = $dochtml->getElement->textContent;
+    $div = $dochtml->getElementById("fecha-select")->textContent;
   ?>
 }
 
@@ -288,7 +288,7 @@ function updateEvents(date) {
 <?php 
     
     
-    if(1==3) {
+    if(1==1) {
         foreach($horas as $hor) {
 ?>
     events += `<div class="event">
@@ -302,7 +302,7 @@ function updateEvents(date) {
         </div>`;
 <?php
         }
-    }if(2==2){
+    }if(2==4){
 ?>
         events = `<div class="no-event">
         <h3>Sin horarios disponibles</h3>

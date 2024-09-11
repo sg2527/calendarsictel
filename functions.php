@@ -6,11 +6,12 @@
         try{
             
             $sql = 'select reservado from reservacion where correo=?';
-                    $correo = 'sgalsvan@sictel.com';
+                    $correo = 'sgalvsan@sictel.com';
                     $comando = Database::getInstance()->getDb() -> prepare($sql);
                     $comando -> execute(array($correo));
                     $row = $comando -> fetch(PDO::FETCH_ASSOC);
-                    if($row['reservado'] == '1'){
+                    
+                    if($row){
                         return true;
                     }
                     else{

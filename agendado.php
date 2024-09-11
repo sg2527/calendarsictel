@@ -107,7 +107,7 @@
                 //echo '<script> alert("fecha: '.$_COOKIE["fechajs"].'\nhorario: '.$_COOKIE["horariojs"].'"); </script>';
                 try {
                     $sql = 'insert into reservacion (correo, nombre, fecha, horario, reservado) values (?, ?, ?, ?, 1)';
-                    $correo = "prueba8@sictel.com";
+                    $correo = "prueba10@sictel.com";
                     $nombre = "Prueba Rodriguez";
                     $fecha = $_COOKIE["fechajs"];
                     $date = strtotime($fecha);
@@ -122,6 +122,8 @@
                 }
                 unset($_COOKIE['fechajs']);
                 unset($_COOKIE['horariojs']);  
+            }else{
+                header('Location: inicio.php');
             }
         }
     }else{
