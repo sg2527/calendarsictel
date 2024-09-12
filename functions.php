@@ -1,12 +1,12 @@
 <?php
     require 'cn/database.php';
-
+    session_start();
     
     function validarReservado(){
         try{
             
             $sql = 'select reservado from reservacion where correo=?';
-                    $correo = 'sgalvsan@sictel.com';
+                    $correo = $_SESSION["mail"];
                     $comando = Database::getInstance()->getDb() -> prepare($sql);
                     $comando -> execute(array($correo));
                     $row = $comando -> fetch(PDO::FETCH_ASSOC);

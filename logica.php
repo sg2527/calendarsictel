@@ -76,7 +76,7 @@ function initCalendar() {
   const lastDate = lastDay.getDate();
   const day = firstDay.getDay();
   const nextDays = 7 - lastDay.getDay() - 1;
-  alert("firstday: "+lastDate);
+  //alert("firstday: "+lastDate);
   date.innerHTML = months[month] + " " + year;
 
   let days = "";

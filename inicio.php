@@ -1,3 +1,13 @@
+<?php
+  require 'functions.php';
+  //error_reporting(E_ERROR | E_PARSE);
+  session_start();
+
+  if (isset($_SESSION["uname"]) && isset($_SESSION["mail"])){
+    if (!validarReservado()){
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -43,10 +53,7 @@
           </div>
           <div class="days"></div>
           <div class="goto-today">
-            <div class="goto">
-              <input type="text" placeholder="mm/yyyy" class="date-input" />
-              <button class="goto-btn">Ir</button>
-            </div>
+            
             <button class="today-btn">Hoy</button>
           </div>
         </div>
@@ -97,27 +104,18 @@
 
     <div class="credits">
       <p>
-        Sictel
+        Sictel Bienvenido
       </p>
     </div>
     <?php include("logica.php"); ?>
-    <!-- <script src="assets/script.js"></script> -->
-    <!-- <script type="text/javascript">
-        const observer = new MutationObserver((mutations, observer) => {
-        mutations.forEach((mutation) => {
-            fecha = document.querySelector(".event-date").innerHTML;
-            document.cookie = "fechajs = " + fecha;
-            alert(fecha);
-            //document.cookie = "fechajs = " + "";
-        });
-        })
-
-        observer.observe(document.querySelector(".event-date"), {
-            subtree: true,
-            childList: true,
-            characterData: true,
-        });
-    </script> -->
-    
   </body>
 </html>
+
+<?php
+    }else{
+      header("Location: agendado.php");
+    }
+  }else{
+    header("Location: login.php");
+  }
+?>
