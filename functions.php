@@ -1,7 +1,22 @@
 <?php
     require 'cn/database.php';
-
-    
+    $horas = ["10:00:00", "11:00:00", "12:00:00", "13:00:00", "15:00:00", "16:00:00"];
+    $disponiblesSep = [
+        '17' => $horas,
+        '18' => $horas,
+        '19' => $horas,
+        '20' => $horas,
+        '21' => $horas,
+        '22' => $horas,
+        '23' => $horas,
+        '24' => $horas,
+        '25' => $horas,
+        '26' => $horas,
+        '27' => $horas,
+        '28' => $horas,
+        '29' => $horas,
+        '30' => $horas,
+    ];
     function validarReservado(){
         try{
             
@@ -55,6 +70,23 @@
         }
     }
 
+    $disponiblesSep = [
+        '17' => $horas,
+        '18' => $horas,
+        '19' => $horas,
+        '20' => $horas,
+        '21' => $horas,
+        '22' => $horas,
+        '23' => $horas,
+        '24' => $horas,
+        '25' => $horas,
+        '26' => $horas,
+        '27' => $horas,
+        '28' => $horas,
+        '29' => $horas,
+        '30' => $horas,
+    ];
+
     function getAllDays(){
         try{
             $sql = "SELECT fecha, horario, reservado FROM `reservacion` WHERE fecha between '2024-09-17' and '2024-11-30'";
@@ -62,6 +94,7 @@
             $comando = Database::getInstance()->getDb() -> prepare($sql);
             $comando -> execute();
             $row = $comando -> fetchAll(PDO::FETCH_ASSOC);
+            var_dump($GLOBALS['disponiblesSep']);
             if($row){
                 foreach($row as $hora){
                 
