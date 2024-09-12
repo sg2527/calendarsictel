@@ -58,6 +58,7 @@
               <h1 class="wow fadeInUp" data-wow-delay=".4s">
 <?php
     //require 'cn/database.php';
+    error_reporting(E_ERROR | E_PARSE);
     require 'functions.php';
     $meses = [
         'Jan'=> 'Enero',
@@ -82,8 +83,8 @@
         'Sat'=> 'Sábado',
         'Sun'=> 'Domingo',
     ];
-
-    if('login'=='login'){
+    session_start();
+    if(isset($_SESSION["uname"]) && isset($_SESSION["mail"])){
         if(validarReservado()){
             try {
                 

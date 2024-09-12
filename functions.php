@@ -1,5 +1,6 @@
 <?php
     require 'cn/database.php';
+<<<<<<< HEAD
     $horas = ["10:00:00", "11:00:00", "12:00:00", "13:00:00", "15:00:00", "16:00:00"];
     $disponiblesSep = [
         '17' => $horas,
@@ -17,11 +18,15 @@
         '29' => $horas,
         '30' => $horas,
     ];
+=======
+    session_start();
+    
+>>>>>>> refs/remotes/origin/main
     function validarReservado(){
         try{
             
             $sql = 'select reservado from reservacion where correo=?';
-                    $correo = 'sgalvsan@sictel.com';
+                    $correo = $_SESSION["mail"];
                     $comando = Database::getInstance()->getDb() -> prepare($sql);
                     $comando -> execute(array($correo));
                     $row = $comando -> fetch(PDO::FETCH_ASSOC);
